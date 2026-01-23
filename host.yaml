@@ -1,0 +1,56 @@
+substitutions:
+  name: host-lvgl
+  friendly_name: Host lvgl test
+
+esphome:
+  name: ${name}
+  friendly_name: ${friendly_name}
+  name_add_mac_suffix: false
+  platformio_options:
+    build_flags:
+    - -g3
+
+host:
+  mac_address: "62:23:45:AF:B3:DD"
+
+api:
+  reboot_timeout: 0s
+
+
+network:
+
+preferences:
+  flash_write_interval: 0s
+packages:
+  lvgl: !include lvgl-package.yaml
+
+time:
+  - platform: host
+    id: time_id
+    timezone: Australia/Sydney
+
+logger:
+  level: DEBUG
+  logs:
+    lvgl: DEBUG
+    sensor: INFO
+    touchscreen: INFO
+
+touchscreen:
+  - platform: sdl
+    id: sdl_touchscreen
+    on_release:
+      - lvgl.resume:
+
+display:
+  - platform: sdl
+    setup_priority: 810
+    update_interval: never
+    #auto_clear_enabled: false
+    dimensions:
+      width: 450
+      height: 600
+
+lvgl:
+      
+  
