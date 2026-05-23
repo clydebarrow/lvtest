@@ -47,14 +47,14 @@ lvgl:
       #    id: display_backlight
       #    transition_length: 5s
   log_level: WARN
-  disp_bg_image: disp_bg
-  disp_bg_color: color_back
+  bottom_layer:
+    bg_image_src: disp_bg
+    bg_color: color_back
   #bg_opa: TRANSP
 
   gradients:
     - id: color_bar
       direction: hor
-      dither: none
       stops:
         -
           color: 0xFF0000
@@ -269,7 +269,8 @@ lvgl:
                     format: "Button checked = %s"
                     args: ['x ? "true" : "false"']
                 - lvgl.update:
-                    disp_bg_color: 0xFFFF00
+                    bottom_layer:
+                      bg_color: 0xFFFF00
                 - lvgl.bar.update:
                     id: lv_bar
                     animated: true
@@ -348,12 +349,12 @@ lvgl:
 
         - image:
             src: bluemax_png
-            angle: 10
+            rotation: 10
             radius: 50
             clip_corner: false
             pivot_x: 50
             pivot_y: 50
-            #transform_angle: 90
+            #transform_rotation: 90
            # mode: virtual
            # antialias: true
             
@@ -509,7 +510,7 @@ lvgl:
         - roller:
             id: lv_roller
             visible_row_count: 2
-            anim_time: 500ms
+            anim_duration: 500ms
             options:
               - Jan
               - Feb
@@ -1049,7 +1050,7 @@ lvgl:
                       grid_cell_column_pos: 1
                       grid_cell_column_span: 1
                       text: "Grid cell 0/1"
-                      transform_angle: !lambda return 450;
+                      transform_rotation: !lambda return 450;
                   - label:
                       grid_cell_x_align: end
                       styles: bdr_style
@@ -1134,7 +1135,6 @@ lvgl:
                      # opa: 50%
                       id: minute_hand
                       color: 0xFF0000
-                      r_mod: -1
                       width: 3
               - 
                 angle_range: 330
@@ -1162,7 +1162,7 @@ lvgl:
                       value: 180
                       width: 4
                       color: 0xA0A0A0
-                      r_mod: -20
+                      length: 50%
 
 globals:
   - id: selected_option
@@ -1240,7 +1240,6 @@ light:
           name: "Slow Pulse"
           # transition_length: 1s      # defaults to 1s
           update_interval: 2s
-      - strobe:
       - strobe:
           name: Strobe Effect With Custom Values
           colors:

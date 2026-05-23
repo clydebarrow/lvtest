@@ -44,9 +44,6 @@ touchscreen:
 
 display:
   - platform: sdl
-    setup_priority: 810
-    update_interval: never
-    #auto_clear_enabled: false
     dimensions:
       width: 450
       height: 600
